@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class about extends Component{
 	
@@ -16,16 +17,51 @@ class about extends Component{
 		console.log("您离开了此路由->onLeave")
 	}
 	
-	render(){
-		return (
-			
-			<div>
-				about
-			</div>
-			
-		)
+	constructor(props){
+		super(props);
+		this.state = {items:['hello','world','click','me']};
+		this.handleAdd = this.handleAdd.bind(this);
 	}
 	
+	handleAdd(){
+		const newItems = this.state.items.concat([
+			prompt('enter some text')
+		]);
+		this.setState({
+			items: newItems
+		})
+	}
+	
+	handleRemove(i){
+		const newItems = this.state.items.slice();
+		newItems.splice(i,1);
+		this.setState({
+			items: newItems
+		})
+	}
+	
+	render(){
+		const items = this.state.items.map((item, index) => (
+			<div key={index} onClick = {() => this.handleRemove(index)}>
+				{item}
+			</div>
+		));
+		
+		return (
+			<div>
+				<button onClick = {this.handleAdd}> Add Item </button>
+				<ReactCSSTransitionGroup 
+					  transitionName="example"
+				      transitionAppear={true}
+				      transitionAppearTimeout={500}
+				      transitionEnterTimeout={500}
+          			  transitionLeaveTimeout={300}
+				>
+					{items}
+				</ReactCSSTransitionGroup>
+			</div>
+		)
+	}
 }
 
 export default about

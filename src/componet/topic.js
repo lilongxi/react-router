@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 //import createHashHistory from 'history/createHashHistory'
 //const history = createHashHistory();
 
-
 class topic extends Component{
 	
 	handleClick(value){

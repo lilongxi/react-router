@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { NavLink } from 'react-router-dom';
 
-import '../App.css';
+import 'animate.css/animate.min.css';
 
 class home extends Component{
 	
